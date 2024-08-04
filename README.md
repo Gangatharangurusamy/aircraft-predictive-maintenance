@@ -77,6 +77,33 @@ python main.py
 ```bash
 python app,py
 ```
+## Docker Setup
+```bash
+docker build -t your-dockerhub-username/aircraft-predictive-maintenance:latest .
+```
+
+```bash
+docker push your-dockerhub-username/aircraft-predictive-maintenance:latest
+```
+for example
+```bash
+docker build -t gangatharang1005e/aircraft-predictive-maintenance:latest .
+```
+
+```bash
+docker push gangatharang1005/aircraft-predictive-maintenance:latest
+```
+## Deploy on EC2
+### Pull and Run Docker Image:
+```bash
+docker pull yourdockerhubusername/aircraft-predictive-maintenance
+docker run --rm -p 8080:8080 yourdockerhubusername/aircraft-predictive-maintenance
+```
+for example 
+```bash
+docker pull gangatharang1005/aircraft-predictive-maintenance
+docker run --rm -p 8080:8080 gangatharang1005/aircraft-predictive-maintenance
+```
 
 ## Technologies Used
 - Languages: Python
