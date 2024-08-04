@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aircraft Predictive Maintenance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Aircraft Predictive Maintenance</h1>
+    <form id="upload-form" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".txt,.csv" required>
+        <input type="submit" value="Predict">
+    </form>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                var resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = '';
+                resultDiv.style.display = 'block';
+
+                if (data.error) {
+                    resultDiv.innerHTML = '<p>Error: ' + data.error + '</p>';
+                } else {
+                    var table = '<table border="1"><tr><th>ID</th><th>Prediction</th></tr>';
+                    for (var i = 0; i < data.ids.length; i++) {
+                        table += '<tr><td>' + data.ids[i] + '</td><td>' + data.predictions[i] + '</td></tr>';
+                    }
+                    table += '</table>';
+                    resultDiv.innerHTML = '<h2>Predictions:</h2>' + table;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = '<p>An error occurred. Please try again.</p>';
+            });
+        });
+    </script>
+</body>
+</html>
