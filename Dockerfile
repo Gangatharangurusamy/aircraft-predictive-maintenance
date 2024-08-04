@@ -1,20 +1,19 @@
-# Use a base image
-FROM  python:3.10.14-slim
+FROM python:3.10.14-slim
 
-# Set the working directory inside the container
+# Set the working directory
 WORKDIR /app
 
-# Copy the application files to the container
+# Copy the requirements file into the container
+COPY requirements.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the application code into the container
 COPY . .
 
-# Set up the Python environment
-RUN python3.10 -m venv /venv
-ENV PATH="/venv/bin:$PATH"
-
-# Expose the port on which your application listens
+# Expose the port the app runs on
 EXPOSE 8080
 
-RUN pip install -r requirements.txt
-
-# Define the command to run your application
-CMD ["python", "app.py"]
+# Run the application using waitress
+CMD ["python", "-m", "waitress", "--host=0.0.0.0", "--port=8080", "app:app"]

@@ -3,3 +3,5 @@ pandas
 scikit-learn
 tensorflow
 flask
+waitress
+# Add any other dependencies your project requires
