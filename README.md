@@ -35,27 +35,25 @@ The goal of this project is to predict aircraft system failures within a 30-cycl
 - pip
 
 ### Clone the Repository
-'''bash
+```bash
 git clone https://github.com/Gangatharangurusamy/aircraft-predictive-maintenance.git
 cd aircraft-predictive-maintenance
-'''
+```
 
 ### Create a Virtual Environment
 
-'''bash
+```bash
 python -m venv venv
 source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-'''
+```
 
 ### Install Dependencies
 
-'''bash
+```bash
 pip install -r requirements.txt
-'''
-
-
+```
 ## File Structure
-'''bash
+```bash
 .
 ├── app.py                 # Flask web application
 ├── data_preprocessing.py  # Data loading and preprocessing
@@ -66,19 +64,19 @@ pip install -r requirements.txt
 │   └── index.html         # HTML template for the web application
 ├── utils.py               # Utility functions for sequence generation and model analysis
 └── README.md              # Project README file
-'''
+```
 
 ## Usage
 
 ### Training the Model
-'''bash
+```bash
 python main.py
-'''
+```
 
 ### Running the Flask Application
-'''bash
+```bash
 python app,py
-'''
+```
 
 ## Technologies Used
 - Languages: Python
